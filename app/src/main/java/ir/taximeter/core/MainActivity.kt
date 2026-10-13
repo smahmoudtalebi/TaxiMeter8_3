@@ -60,7 +60,7 @@ class MainActivity : ComponentActivity() {
             if (!activityVisible) return
             lifecycleScope.launch {
                 refreshScreen()
-                if (activityVisible) mainHandler.postDelayed(this, UI_REFRESH_INTERVAL_MS)
+                if (activityVisible) mainHandler.postDelayed(refreshRunnable, UI_REFRESH_INTERVAL_MS)
             }
         }
     }
