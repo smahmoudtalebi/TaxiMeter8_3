@@ -55,12 +55,16 @@ class MainActivity : ComponentActivity() {
     private val mainHandler = Handler(Looper.getMainLooper())
     // Poll only while visible. The attached view tree is reconciled in place, not replaced.
     private var activityVisible = false
-    private val refreshRunnable = object : Runnable {
+    private val refreshRunnable: Runnable = object : Runnable {
         override fun run() {
             if (!activityVisible) return
+            // Capture this Runnable explicitly; do not refer to the property being initialized.
+            val scheduledTask: Runnable = this
             lifecycleScope.launch {
                 refreshScreen()
-                if (activityVisible) mainHandler.postDelayed(refreshRunnable, UI_REFRESH_INTERVAL_MS)
+                if (activityVisible) {
+                    mainHandler.postDelayed(scheduledTask, UI_REFRESH_INTERVAL_MS)
+                }
             }
         }
     }

@@ -4,6 +4,10 @@ plugins {
     id("com.google.devtools.ksp")
 }
 
+ksp {
+    arg("room.schemaLocation", "$projectDir/schemas")
+}
+
 android {
     namespace = "ir.taximeter.core"
     compileSdk = 35
@@ -13,7 +17,7 @@ android {
         minSdk = 23
         targetSdk = 35
         versionCode = 6
-        versionName = "0.8.3-inplace-ui"
+        versionName = "0.8.5-android6"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     compileOptions {
